@@ -86,9 +86,20 @@ public class FirstFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_first, container, false);
+//
+//        AnnouncementButton = view.findViewById(R.id.AnnouncementButton);
+//
+//        AnnouncementButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MakeAnnouncementActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
         AnnouncementButton = view.findViewById(R.id.AnnouncementButton);
@@ -96,7 +107,7 @@ public class FirstFragment extends Fragment {
         AnnouncementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MakeAnnouncementActivity.class);
+                Intent intent = new Intent(getActivity(), CreateAnnouncementActivity.class);
                 startActivity(intent);
             }
         });
