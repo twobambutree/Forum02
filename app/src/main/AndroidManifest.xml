@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Forum2">
         <activity android:name=".FetchFilesActivity"></activity>
+        <activity android:name=".CreateAnnouncementActivity" />
         <activity android:name=".MakeAnnouncementActivity" />
         <activity android:name=".FacilitiesChatActivity" />
         <activity android:name=".ManagementChatActivity" />
@@ -23,6 +24,7 @@
         <activity android:name=".InformaticsChatActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".SecondFragment" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
