@@ -36,13 +36,12 @@ public class CreateAnnouncementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_announcement_01);
+        setContentView(R.layout.activity_create_announcement);
 
         submitButton = findViewById(R.id.submitButton);
         clearButton = findViewById(R.id.clearButton);
         enterSubject = findViewById(R.id.enterSubject);
         enterDetail = findViewById(R.id.enterDetail);
-
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Announcements");
@@ -68,114 +67,18 @@ public class CreateAnnouncementActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-
-                                if (task.isSuccessful()) {
-
-                                    Announcement announcement = new Announcement(subjectEnter, detailEnter, curDate);
-
-                                    FirebaseDatabase.getInstance().getReference("Announcement")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(announcement).addOnCompleteListener(new OnCompleteListener<Void>(){
-
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> Task){
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(CreateAnnouncementActivity.this, "An announcerment has been added!", Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(CreateAnnouncementActivity.this, SecondFragment.class);
-                                                startActivity(intent);
-                                            } else {
-                                                Toast.makeText(CreateAnnouncementActivity.this, "Failled to to add an announcement!", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
-
-                                }else{
-                                    Toast.makeText(CreateAnnouncementActivity.this, "Failled to register user!", Toast.LENGTH_LONG).show();
-                                }
-
+                                Announcement announcement = new Announcement(subjectEnter, detailEnter, curDate);
+                                FirebaseDatabase.getInstance().getReference("Announcement").setValue(announcement).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> Task){
+                                        Toast.makeText(CreateAnnouncementActivity.this, "An announcerment has been added!", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(CreateAnnouncementActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         });
-
             }
         });
-
-//        loginButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-//        createButton2.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                String emailEnter = enterEmail2.getText().toString();
-//                String passwordEnter = enterPassword2.getText().toString();
-//                String nameEnter = enterName.getText().toString();
-//
-//                if (nameEnter.isEmpty()){
-//                    enterName.setError("Your name is required!");
-//                    enterName.requestFocus();
-//                }
-//
-//                if (emailEnter.isEmpty()){
-//                    enterEmail2.setError("Your email is required!");
-//                    enterEmail2.requestFocus();
-//                    return;
-//                }
-//
-//                if (passwordEnter.isEmpty()){
-//                    enterPassword2.setError("You need to set a password!");
-//                    enterPassword2.requestFocus();
-//                    return;
-//                }
-//
-//                if (!Patterns.EMAIL_ADDRESS.matcher(emailEnter).matches()){
-//                    enterEmail2.setError("Please provide a valid email! ");
-//                    enterEmail2.requestFocus();
-//                    return;
-//                }
-//
-//                if (passwordEnter.length() < 6){
-//                    enterPassword2.setError("Password length is to short. Needs to be more than 6 characters!");
-//                    enterPassword2.requestFocus();
-//                    return;
-//                }
-//
-//                mAuth.createUserWithEmailAndPassword(emailEnter, passwordEnter)
-//                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-//
-//                        if (task.isSuccessful()) {
-//
-//                            User user = new User(emailEnter, nameEnter);
-//
-//                            FirebaseDatabase.getInstance().getReference("User")
-//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>(){
-//
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> Task){
-//                                    if (task.isSuccessful()) {
-//                                        Toast.makeText(CreateAccountActivity.this, "Account has been created!", Toast.LENGTH_LONG).show();
-//                                        Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-//                                        startActivity(intent);
-//                                    } else {
-//                                        Toast.makeText(CreateAccountActivity.this, "Failled to register user!", Toast.LENGTH_LONG).show();
-//                                    }
-//                                }
-//                            });
-//
-//                        }else{
-//                            Toast.makeText(CreateAccountActivity.this, "Failled to register user!", Toast.LENGTH_LONG).show();
-//                        }
-//
-//                    }
-//                });
-//            }
-//        });
-
     }
 }
